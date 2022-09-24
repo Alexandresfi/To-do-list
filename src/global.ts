@@ -19,7 +19,7 @@ html {
 }
 
 body {
-    background: #1E1A1B;
+    background: #1C1C1C;
     color: white;
     position: relative;
 

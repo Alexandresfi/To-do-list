@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    max-width: 25rem;
+    max-width: 30rem;
     width: 100%;
     
     margin: 3rem auto;
@@ -28,7 +28,8 @@ export const Button = styled.button`
 `
 
 export const Input = styled.input`
-    width: 20rem;
+    max-width: 25rem;
+    width: 100%;
     height: 3rem;
 
     border: none;

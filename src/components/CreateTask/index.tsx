@@ -22,7 +22,7 @@ export function CreateTask () {
     }
 
     const createtask = () => {
-        if(description) {
+        if(description && description.length < 81) {
             const item:Items = {
                 id: uuid(),
                 description: description ? description : null,
@@ -33,7 +33,7 @@ export function CreateTask () {
             createTask(item)
             setDescription('')
         } else {
-            alert('por favor adiciona uma descrição a sua task')
+            alert('task muito grande, ou você não adicionou nenhuma task')
         }
     }
 
