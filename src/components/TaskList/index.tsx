@@ -1,11 +1,18 @@
+import { useTasks } from "../../hooks/useTasks";
 import { List } from "./styles";
 
 export function TaskList () {
+    const {tasks} = useTasks()
     return (
-        <List>
-            <li>Teste 1</li>
-            <li>Teste 2</li>
-            <li>Teste 3</li>
-        </List>
+        <>
+        {tasks?.map(item => (
+            <List key={item?.id}>
+                <li>
+                    {item?.description}
+                </li>
+            </List>
+        ))}
+        
+        </>
     )
 }

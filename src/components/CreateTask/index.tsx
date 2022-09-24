@@ -3,8 +3,9 @@ import { useState } from "react";
 import { Container, Input, Button } from "./styles";
 
 import { v4 as uuid} from "uuid"
+import { useTasks } from "../../hooks/useTasks";
 
-interface Items {
+export interface Items {
     id: string
     description: string | null
     done: boolean
@@ -13,7 +14,7 @@ interface Items {
 
 export function CreateTask () {
 
-    const [task, setTask] = useState<Items[]>([])
+    const { createTask } = useTasks()
     const [description, setDescription] = useState<string>()
 
     const handleChange = (value:string) => {
@@ -26,13 +27,11 @@ export function CreateTask () {
                 id: uuid(),
                 description: description ? description : null,
                 done: false,
-                situation: "todo"
+                situation: "to-do"
             }
     
-            setTask([...task, item])
-    
+            createTask(item)
             setDescription('')
-            console.log(task)
         } else {
             alert('por favor adiciona uma descrição a sua task')
         }

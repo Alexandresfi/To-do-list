@@ -10,8 +10,9 @@ export const Container = styled.div`
 
 export const Button = styled.button`
     background-color: #00BFFF;
-    border: none;
     color: white;
+    border: none;
+
     font-weight: bolder;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -21,6 +22,8 @@ export const Button = styled.button`
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+
+    cursor: pointer;
 
 `
 
