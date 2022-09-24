@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const List = styled.ul`
     margin: auto;
-    width: 80%;
+    width: 100%;
 
     li {
-        height: 1.5rem;
-        max-width: 50%;
+        height: 4rem;
+        max-width: 75%;
 
         display: flex;
         justify-content: space-between;
@@ -27,6 +27,10 @@ export const List = styled.ul`
             filter: brightness(0.9);
             background-color: #F5F5F5;
             color: #000;
+        }
+
+        img {
+            cursor: pointer;
         }
     }
 `

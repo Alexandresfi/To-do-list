@@ -13,7 +13,8 @@ interface TaskProviderProps {
 
 interface TasksContextData {
     tasks: Items[]
-    createTask: (task: Items) => void
+    createTask: ( task: Items ) => void
+    updateTask: ( task:Items[] ) => void
 }
 
 const TaskContext = createContext<TasksContextData>({} as TasksContextData)
@@ -23,6 +24,10 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
 
     const createTask = ( task:Items ) => {
         setTasks([...tasks, task])
+    }
+
+    const updateTask = ( task:Items[] ) => {
+        setTasks(task)
     }
 
     const localCopy = async () => {
@@ -43,7 +48,7 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
     },[tasks])
 
     return (
-        <TaskContext.Provider value={{tasks, createTask}}>
+        <TaskContext.Provider value={{tasks, createTask, updateTask}}>
             {children}
         </TaskContext.Provider>
     )

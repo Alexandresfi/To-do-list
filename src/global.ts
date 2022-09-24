@@ -32,6 +32,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+[disabled] {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
 a{
     text-decoration: none;
     color: white;
