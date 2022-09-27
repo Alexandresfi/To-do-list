@@ -1,13 +1,15 @@
 import { useTasks } from "../../hooks/useTasks";
 
-import { ContainerTask, ItemList, List, Select } from "./styles";
+import { ContainerPriority, ContainerTask, ItemList, List, Select } from "./styles";
 
 import Done from "../../assets/done.png";
 import NotDone from "../../assets/not-done.png";
 import Delete from "../../assets/delete.png";
+import { useShowList } from "../../hooks/useStateTask";
 
 export function TaskList() {
   const { tasks, updateTask } = useTasks();
+  const { taskSituation } = useShowList();
 
   const handleToggleCompletion = (id: string) => {
     const taskComplete = tasks.map((task) =>
@@ -31,10 +33,10 @@ export function TaskList() {
   return (
     <>
       <List>
-        {tasks?.map(
-          (task) =>
-            task.situation === "priority" && (
-              <>
+        {tasks?.map((task) => (
+          <>
+            {task.situation === "priority" && (
+              <ContainerPriority>
                 <ItemList key={task?.id} done={task.done}>
                   <img
                     src={task.done ? Done : NotDone}
@@ -48,13 +50,13 @@ export function TaskList() {
                     {!task.done && (
                       <Select
                         name="situation"
+                        value={task.situation}
                         onChange={(e) =>
                           handlechangeList(e.target.value, task.id)
                         }
                       >
                         <option value="to-do" selected>
-                          {" "}
-                          situação{" "}
+                          A fazer
                         </option>
                         <option value="for-later"> Para Depois </option>
                         <option value="priority"> Prioridade </option>
@@ -67,9 +69,115 @@ export function TaskList() {
                     />
                   </div>
                 </ItemList>
-              </>
-            )
-        )}
+              </ContainerPriority>
+            )}
+
+            {taskSituation.toDo && task.situation === "to-do" && (
+              <ItemList key={task?.id} done={task.done}>
+                <img
+                  src={task.done ? Done : NotDone}
+                  alt="done"
+                  onClick={() => handleToggleCompletion(task.id)}
+                />
+
+                <ContainerTask> {task?.description} </ContainerTask>
+
+                <div>
+                  {!task.done && (
+                    <Select
+                      name="situation"
+                      value={task.situation}
+                      onChange={(e) =>
+                        handlechangeList(e.target.value, task.id)
+                      }
+                    >
+                      <option defaultValue="to-do" selected>
+                        A fazer
+                      </option>
+                      <option value="for-later"> Para Depois </option>
+                      <option value="priority"> Prioridade </option>
+                    </Select>
+                  )}
+                  <img
+                    src={Delete}
+                    alt="delete"
+                    onClick={() => deleteTask(task.id)}
+                  />
+                </div>
+              </ItemList>
+            )}
+
+            {taskSituation.done && task.done && (
+              <ItemList key={task?.id} done={task.done}>
+                <img
+                  src={task.done ? Done : NotDone}
+                  alt="done"
+                  onClick={() => handleToggleCompletion(task.id)}
+                />
+
+                <ContainerTask> {task?.description} </ContainerTask>
+
+                <div>
+                  {!task.done && (
+                    <Select
+                      name="situation"
+                      value={task.situation}
+                      onChange={(e) =>
+                        handlechangeList(e.target.value, task.id)
+                      }
+                    >
+                      <option value="to-do" selected>
+                        A fazer
+                      </option>
+                      <option value="for-later"> Para Depois </option>
+                      <option value="priority"> Prioridade </option>
+                    </Select>
+                  )}
+                  <img
+                    src={Delete}
+                    alt="delete"
+                    onClick={() => deleteTask(task.id)}
+                  />
+                </div>
+              </ItemList>
+            )}
+
+            {taskSituation.forLater && task.situation === "for-later" && (
+              <ItemList key={task?.id} done={task.done}>
+                <img
+                  src={task.done ? Done : NotDone}
+                  alt="done"
+                  onClick={() => handleToggleCompletion(task.id)}
+                />
+
+                <ContainerTask> {task?.description} </ContainerTask>
+
+                <div>
+                  {!task.done && (
+                    <Select
+                      name="situation"
+                      value={task.situation}
+                      onChange={(e) =>
+                        handlechangeList(e.target.value, task.id)
+                      }
+                    >
+                      <option value="to-do" selected>
+                        A fazer
+                      </option>
+                      <option value="for-later"> Para Depois </option>
+                      <option value="priority"> Prioridade </option>
+                    </Select>
+                  )}
+                  <img
+                    src={Delete}
+                    alt="delete"
+                    onClick={() => deleteTask(task.id)}
+                  />
+                </div>
+              </ItemList>
+            )}
+          </>
+        ))}
       </List>
     </>
   );

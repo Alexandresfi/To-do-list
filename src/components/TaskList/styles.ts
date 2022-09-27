@@ -50,6 +50,7 @@ export const ItemList = styled.li<Done>`
 
         select {
             color: #000;
+            cursor: pointer;
             text-decoration: none;
         }
     }
@@ -90,5 +91,20 @@ export const ContainerTask = styled.span`
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+`
+
+export const ContainerPriority = styled.div`
+    background-color: red;
+    max-width: 75%;
+
+    margin: auto;
+
+    position: sticky;
+    top: 0;
+
+    li {
+        max-width: 100%;
+        width: 100%;
+    }
 
 `

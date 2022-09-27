@@ -1,17 +1,15 @@
 import { CreateTask } from './components/CreateTask';
 import { Header } from './components/Header';
 import { TaskList } from './components/TaskList';
-import { TasksProvider } from './hooks/useTasks';
-
-
+import { AppProvider } from './hooks';
 
 export function ToDoList() {
 
   return (
-    <TasksProvider>
+    <AppProvider>
       <Header />
       <CreateTask />
       <TaskList/>
-    </TasksProvider>
+    </AppProvider>
   )
 }

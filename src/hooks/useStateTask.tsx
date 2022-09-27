@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 export interface StateListTask {
     toDo?: boolean
@@ -6,18 +6,19 @@ export interface StateListTask {
     forLater?: boolean
 }
 
-interface ShowStiuationListProvider {
+interface ShowStiuationListProps {
     children: ReactNode
 }
 
-interface ShowSituationData {
-    taskSituation : StateListTask,
-    updateSituationList: (situation: StateListTask) => void
+interface ShowStiuationListProviderData {
+    taskSituation: StateListTask,
+    updateSituation: ( situation: StateListTask ) => void
+    teste: string
 }
 
-const ShowListStuationContentxt = createContext<ShowSituationData>({} as ShowSituationData)
+const ShowListStuationContentext = createContext<ShowStiuationListProviderData>({} as ShowStiuationListProviderData)
 
-export function ShowStiuationListProvider ( {children}:ShowStiuationListProvider ) {
+export function ShowStiuationListProvider ( {children}:ShowStiuationListProps ) {
 
     const [taskSituation, setTaskSituation] = useState<StateListTask>({
         toDo: true,
@@ -25,17 +26,22 @@ export function ShowStiuationListProvider ( {children}:ShowStiuationListProvider
         forLater: false
     })
 
-    const updateSituationList = (situation:StateListTask) => {
+    const updateSituation = ( situation:StateListTask ) => {
         setTaskSituation(situation)
+        console.log(situation)
     }
 
-    return <ShowListStuationContentxt.Provider value={{taskSituation, updateSituationList}}>
-        {children}
-    </ShowListStuationContentxt.Provider>
+    const teste = 'foi aqyu'
+
+    return (
+        <ShowListStuationContentext.Provider value={{taskSituation, updateSituation, teste }}>
+            {children}
+        </ShowListStuationContentext.Provider>
+    )
 }
 
 export function useShowList () {
-    const context = useContext(ShowListStuationContentxt)
+    const context = useContext(ShowListStuationContentext)
 
     return context
 }
