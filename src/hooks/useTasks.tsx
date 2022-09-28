@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState, useCallback } from "react";
 
 export interface Items {
     id: string
@@ -29,10 +29,15 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
     const updateTask = ( task:Items[] ) => {
         setTasks(task)
     }
+    
 
-    const localCopy = async () => {
-      await  localStorage.setItem('todoList:myToDo', JSON.stringify(tasks))
-    }
+    const localCopy = useCallback(() => {
+        const teste = async () => {
+            await localStorage.setItem('todoList:myToDo', JSON.stringify(tasks))
+        }
+
+        teste()
+    },[tasks]) 
     
     const getTasks = async () => {
         const tasksData = await localStorage.getItem('todoList:myToDo')
@@ -40,12 +45,13 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
     }
 
     useEffect(()=>{
-        getTasks()
+      getTasks()
     },[])
 
     useEffect(()=>{
-        tasks.length > 0 && localCopy()
-    },[tasks])
+      tasks.length > 0 && localCopy()
+      console.log('rodei')
+    },[tasks.length, localCopy])
 
     return (
         <TaskContext.Provider value={{tasks, createTask, updateTask}}>
