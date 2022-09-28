@@ -28,7 +28,6 @@ export function ShowStiuationListProvider ( {children}:ShowStiuationListProps ) 
 
     const updateSituation = ( situation:StateListTask ) => {
         setTaskSituation(situation)
-        console.log(situation)
     }
 
     const teste = 'foi aqyu'
