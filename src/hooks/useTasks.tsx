@@ -50,7 +50,6 @@ export function TasksProvider({ children }: TaskProviderProps) {
 
     useEffect(() => {
         tasks.length > 0 && localCopy()
-        tasks.length === 1 && localStorage.removeItem('todoList:myToDo')
     }, [tasks.length, localCopy])
 
     return (
