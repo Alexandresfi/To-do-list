@@ -19,6 +19,8 @@ export function TaskList() {
     };
 
     const deleteTask = (id: string) => {
+        tasks.length === 1 && localStorage.removeItem('todoList:myToDo')
+
         const filtedTasks = tasks.filter((task) => task.id !== id);
         updateTask(filtedTasks);
     };
@@ -35,7 +37,7 @@ export function TaskList() {
             <List>
                 {tasks?.map((task) => (
                     <>
-                        {task.situation === "priority" && (
+                        {task.situation === "priority" && !task.done && (
                             <ContainerPriority>
                                 <ItemList key={task?.id} done={task.done}>
                                     <img
@@ -72,7 +74,7 @@ export function TaskList() {
                             </ContainerPriority>
                         )}
 
-                        {taskSituation.toDo && task.situation === "to-do" && (
+                        {taskSituation.toDo && task.situation === "to-do" && !task.done && (
                             <ItemList key={task?.description} done={task.done}>
                                 <img
                                     src={task.done ? Done : NotDone}
@@ -142,7 +144,7 @@ export function TaskList() {
                             </ItemList>
                         )}
 
-                        {taskSituation.forLater && task.situation === "for-later" && (
+                        {taskSituation.forLater && task.situation === "for-later" && !task.done && (
                             <ItemList key={task?.id} done={task.done}>
                                 <img
                                     src={task.done ? Done : NotDone}
