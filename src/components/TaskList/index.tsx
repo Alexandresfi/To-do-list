@@ -21,6 +21,7 @@ export function TaskList() {
   const deleteTask = (id: string) => {
     const filtedTasks = tasks.filter((task) => task.id !== id);
     updateTask(filtedTasks);
+
   };
 
   const handlechangeList = (value: string, id: string) => {

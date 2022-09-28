@@ -40,12 +40,13 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
     }
 
     useEffect(()=>{
-        getTasks()
+      getTasks()
     },[])
 
     useEffect(()=>{
-        tasks.length > 0 && localCopy()
-    },[tasks])
+      tasks.length > 0 && localCopy()
+      console.log('rodei')
+    },[tasks.length])
 
     return (
         <TaskContext.Provider value={{tasks, createTask, updateTask}}>
