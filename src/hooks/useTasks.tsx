@@ -13,23 +13,23 @@ interface TaskProviderProps {
 
 interface TasksContextData {
     tasks: Items[]
-    createTask: ( task: Items ) => void
-    updateTask: ( task:Items[] ) => void
+    createTask: (task: Items) => void
+    updateTask: (task: Items[]) => void
 }
 
 const TaskContext = createContext<TasksContextData>({} as TasksContextData)
 
-export function TasksProvider ( {children}:TaskProviderProps ) {
+export function TasksProvider({ children }: TaskProviderProps) {
     const [tasks, setTasks] = useState<Items[]>([])
 
-    const createTask = ( task:Items ) => {
+    const createTask = (task: Items) => {
         setTasks([...tasks, task])
     }
 
-    const updateTask = ( task:Items[] ) => {
+    const updateTask = (task: Items[]) => {
         setTasks(task)
     }
-    
+
 
     const localCopy = useCallback(() => {
         const teste = async () => {
@@ -37,30 +37,30 @@ export function TasksProvider ( {children}:TaskProviderProps ) {
         }
 
         teste()
-    },[tasks]) 
-    
+    }, [tasks])
+
     const getTasks = async () => {
         const tasksData = await localStorage.getItem('todoList:myToDo')
         tasksData && setTasks(JSON.parse(tasksData))
     }
 
-    useEffect(()=>{
-      getTasks()
-    },[])
+    useEffect(() => {
+        getTasks()
+    }, [])
 
-    useEffect(()=>{
-      tasks.length > 0 && localCopy()
-      console.log('rodei')
-    },[tasks.length, localCopy])
+    useEffect(() => {
+        tasks.length > 0 && localCopy()
+        tasks.length === 1 && localStorage.removeItem('todoList:myToDo')
+    }, [tasks.length, localCopy])
 
     return (
-        <TaskContext.Provider value={{tasks, createTask, updateTask}}>
+        <TaskContext.Provider value={{ tasks, createTask, updateTask }}>
             {children}
         </TaskContext.Provider>
     )
 }
 
-export function useTasks () {
+export function useTasks() {
     const context = useContext(TaskContext)
 
     return context
