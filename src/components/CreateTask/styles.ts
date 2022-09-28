@@ -6,6 +6,12 @@ export const Container = styled.div`
     width: 100%;
     
     margin: 3rem auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 0;
+    justify-content: center;
+
 `
 
 export const Button = styled.button`

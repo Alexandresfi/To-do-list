@@ -3,7 +3,7 @@ import { StateListTask } from "../../hooks/useStateTask";
 
 export const ContainerHeader = styled.header`
     background-color: #00bfff4d;
-    height: 4rem;
+    min-height: 4rem;
 
     display: flex;
     justify-content: space-evenly;
@@ -14,6 +14,15 @@ export const ContainerHeader = styled.header`
         justify-content: space-evenly;
         align-items: center;
         gap: 0 20px;
+    }
+
+    @media(max-width: 660px) {
+        flex-direction: column;
+        gap: 20px;
+        
+        width: 100vw;
+
+        padding: 10px;
     }
 `
 

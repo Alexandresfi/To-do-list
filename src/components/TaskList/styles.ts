@@ -6,11 +6,14 @@ interface Done {
 
 export const List = styled.ul`
     margin: auto;
-    width: 100%;  
+    width: 100%;
+    
+    padding: 0 6px;
+    
 `
 
 export const ItemList = styled.li<Done>`
-    height: 4rem;
+    min-height: 4rem;
     max-width: 75%;
 
     display: flex;
@@ -64,6 +67,14 @@ export const ItemList = styled.li<Done>`
         align-items: center;
 
         gap: 0 20px;
+    }
+
+    @media(max-width: 660px) {
+        max-width: 100%;
+        width: 100%;
+
+        flex-direction: column;
+
     }
 
 `
